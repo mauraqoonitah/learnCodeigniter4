@@ -10,9 +10,7 @@ class Pages extends BaseController
             'title' => 'Home | Belajar CI 4'
 
         ];
-        echo view('layout/header', $data);
-        echo view('pages/home');
-        echo view('layout/footer');
+        return view('pages/home', $data);
     }
     public function about()
     {
@@ -20,8 +18,26 @@ class Pages extends BaseController
             'title' => 'About | Belajar CI 4'
 
         ];
-        echo view('layout/header', $data);
-        echo view('pages/about');
-        echo view('layout/footer');
+        return view('pages/home', $data);
+    }
+    public function contact()
+    {
+        $data = [
+            'title' => 'Contact | Belajar CI 4',
+            'alamat' => [
+                [
+                    'tipe' => 'rumah',
+                    'alamat' => 'Jl. bintara',
+                    'kota' => 'bekasi'
+
+                ],
+                [
+                    'tipe' => 'Kantor',
+                    'alamat' => 'Jl. rawamawngun',
+                    'kota' => 'jakarta'
+                ]
+            ]
+        ];
+        return view('pages/contact', $data);
     }
 }
