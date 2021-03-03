@@ -12,8 +12,6 @@
                         <th scope="col">#</th>
                         <th scope="col">Poster</th>
                         <th scope="col">Judul</th>
-                        <th scope="col">Overview</th>
-                        <th scope="col">Kategori</th>
                         <th scope="col">Tahun</th>
                         <th scope="col">Aksi</th>
                     </tr>
@@ -25,11 +23,9 @@
                             <th scope="row"><?= $i++; ?></th>
                             <td><img src="/img/<?= $mov['poster']; ?>" alt="" class="sampul"></td>
                             <td><?= $mov['judul']; ?></td>
-                            <td><?= $mov['overview']; ?></td>
-                            <td><?= $mov['kategori']; ?></td>
                             <td><?= $mov['tahun']; ?></td>
                             <td>
-                                <a href="" class="btn btn-success">Detail</a>
+                                <a href="/movie/<?= $mov['slug']; ?>" class="btn btn-success">Detail</a>
                             </td>
 
                         </tr>

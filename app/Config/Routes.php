@@ -33,6 +33,11 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Pages::index');
 
+$routes->get('/movie/(:segment)', 'Movie::detail/$1');
+
+
+
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
