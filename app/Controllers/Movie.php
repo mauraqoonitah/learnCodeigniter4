@@ -60,7 +60,16 @@ class Movie extends BaseController
 
         // cek validasi input
         if (!$this->validate([
-            'judul' => 'required|is_unique[movie.judul]',
+            'judul' => [
+                'rules'  => 'required|is_unique[movie.judul]',
+                'errors' => [
+                    'required' => '{field} movie harus diisi.',
+                    'is_unique' => '{field} movie sudah terdaftar!'
+                ]
+            ],
+
+
+
             'poster' => 'required',
             'overview' => 'required',
             'kategori' => 'required',
