@@ -21,7 +21,7 @@
                             <h6>Kategori:</h6>
                             <p class="card-text"><?= $movie['kategori']; ?></p>
 
-                            <a href="#" class="btn btn-warning">Edit</a>
+                            <a href="/movie/edit/<?= $movie['slug']; ?>" class="btn btn-warning">Edit</a>
 
                             <form action="/movie/delete/<?= $movie['id']; ?>" method="post" class="d-inline">
                                 <?= csrf_field(); ?>

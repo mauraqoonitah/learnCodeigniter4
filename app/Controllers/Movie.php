@@ -48,7 +48,7 @@ class Movie extends BaseController
     public function create()
     {
         $data = [
-            'title' => 'Detail Movie',
+            'title' => 'Form Tambah Data Movie',
             'validation' => \Config\Services::validation()
 
         ];
@@ -67,9 +67,6 @@ class Movie extends BaseController
                     'is_unique' => '{field} movie sudah terdaftar!'
                 ]
             ],
-
-
-
             'poster' => 'required',
             'overview' => 'required',
             'kategori' => 'required',
@@ -105,6 +102,69 @@ class Movie extends BaseController
     {
         $this->movieModel->delete($id);
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
+
+        return redirect()->to('/movie');
+    }
+
+    public function edit($slug)
+    {
+        $data = [
+            'title' => 'Form Ubah Data Movie',
+            'validation' => \Config\Services::validation(),
+            'movie' => $this->movieModel->getMovie($slug)
+
+        ];
+        return view('movie/edit', $data);
+    }
+
+    public function update($id)
+    {
+
+        //cek judul 
+        $movieOld = $this->movieModel->getMovie($this->request->getVar('slug'));
+        if ($movieOld['judul'] == $this->request->getVar('judul')) {
+            $rule_judul = 'required';
+        } else {
+            $rule_judul = 'required|is_unique[movie.judul]';
+        }
+
+        // cek validasi input
+        if (!$this->validate([
+            'judul' => [
+                'rules'  => $rule_judul,
+                'errors' => [
+                    'required' => '{field} movie harus diisi.',
+                    'is_unique' => '{field} movie sudah terdaftar!'
+                ]
+            ],
+            'poster' => 'required',
+            'overview' => 'required',
+            'kategori' => 'required',
+            'tahun' => 'required|integer|exact_length[4]'
+
+        ])) {
+            //ambil pesan kesalahan
+            $validation = \Config\Services::validation();
+            return redirect()->to('/movie/edit/' . $this->request->getVar('slug'))->withInput()->with('validation', $validation);
+        }
+
+
+        // dd($this->request->getVar());
+
+        $slug = url_title($this->request->getVar('judul'), '-', true);
+
+        $this->movieModel->save([
+            'id' => $id,
+            'judul' => $this->request->getVar('judul'),
+            'slug' => $slug,
+            'poster' => $this->request->getVar('poster'),
+            'overview' => $this->request->getVar('overview'),
+            'kategori' => $this->request->getVar('kategori'),
+            'tahun' => $this->request->getVar('tahun'),
+        ]);
+
+
+        session()->setFlashdata('pesan', 'Data berhasil diubah.');
 
         return redirect()->to('/movie');
     }
