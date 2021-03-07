@@ -35,7 +35,9 @@ $routes->get('/', 'Pages::index');
 
 $routes->get('/movie/create', 'Movie::create');
 
-$routes->get('/movie/(:segment)', 'Movie::detail/$1');
+$routes->delete('/movie/(:num)', 'Movie::delete/$1');
+
+$routes->get('/movie/(:any)', 'Movie::detail/$1');
 
 
 

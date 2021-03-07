@@ -100,4 +100,12 @@ class Movie extends BaseController
 
         return redirect()->to('/movie');
     }
+
+    public function delete($id)
+    {
+        $this->movieModel->delete($id);
+        session()->setFlashdata('pesan', 'Data berhasil dihapus.');
+
+        return redirect()->to('/movie');
+    }
 }

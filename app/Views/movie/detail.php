@@ -22,7 +22,12 @@
                             <p class="card-text"><?= $movie['kategori']; ?></p>
 
                             <a href="#" class="btn btn-warning">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
+
+                            <form action="/movie/delete/<?= $movie['id']; ?>" method="post" class="d-inline">
+                                <?= csrf_field(); ?>
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('yakin dihapus?');">Delete</button>
+                            </form>
                             <br><br>
                             <a href="/movie" class="btn btn-primary">Kembali</a>
                         </div>
