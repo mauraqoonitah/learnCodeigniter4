@@ -47,9 +47,9 @@ class Movie extends BaseController
 
     public function create()
     {
-
         $data = [
-            'title' => 'Detail Movie'
+            'title' => 'Detail Movie',
+            'validation' => \Config\Services::validation()
 
         ];
         return view('movie/create', $data);
@@ -57,6 +57,23 @@ class Movie extends BaseController
 
     public function save()
     {
+
+        // cek validasi input
+        if (!$this->validate([
+            'judul' => 'required|is_unique[movie.judul]',
+            'poster' => 'required',
+            'overview' => 'required',
+            'kategori' => 'required',
+            'tahun' => 'required|integer|exact_length[4]'
+
+        ])) {
+            //ambil pesan kesalahan
+            $validation = \Config\Services::validation();
+            // dd($validation);
+
+            return redirect()->to('/movie/create')->withInput()->with('validation', $validation);
+        }
+
         // dd($this->request->getVar());
 
         $slug = url_title($this->request->getVar('judul'), '-', true);
