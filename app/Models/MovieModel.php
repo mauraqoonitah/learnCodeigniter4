@@ -8,6 +8,7 @@ class movieModel extends Model
 {
     protected $table      = 'movie';
     protected $useTimestamps = true;
+    protected $allowedFields = ['judul', 'slug', 'poster', 'overview', 'kategori', 'tahun'];
 
     public function getMovie($slug = false)
     {

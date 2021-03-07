@@ -37,6 +37,41 @@ class Movie extends BaseController
             'title' => 'Detail Movie',
             'movie' => $this->movieModel->getMovie($slug)
         ];
+
+        // jika movie tidak ada di tabel
+        if (empty($data['movie'])) {
+            throw new \CodeIgniter\Exceptions\PageNotFoundException('Judul Movie ' . $slug . ' Tidak ditemukan.');
+        }
         return view('movie/detail', $data);
+    }
+
+    public function create()
+    {
+
+        $data = [
+            'title' => 'Detail Movie'
+
+        ];
+        return view('movie/create', $data);
+    }
+
+    public function save()
+    {
+        // dd($this->request->getVar());
+
+        $slug = url_title($this->request->getVar('judul'), '-', true);
+
+        $this->movieModel->save([
+            'judul' => $this->request->getVar('judul'),
+            'slug' => $slug,
+            'poster' => $this->request->getVar('poster'),
+            'overview' => $this->request->getVar('overview'),
+            'kategori' => $this->request->getVar('kategori'),
+            'tahun' => $this->request->getVar('tahun'),
+        ]);
+
+        session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
+
+        return redirect()->to('/movie');
     }
 }
