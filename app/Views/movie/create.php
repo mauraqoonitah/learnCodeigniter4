@@ -53,7 +53,7 @@
                     <label for="poster" class="col-sm-2 col-form-label">Poster</label>
                     <div class="col-sm-2">
                         <img src="
-                    /img/default.png" class="img-thumbnail img-preview mb-3" style="width: 100px;">
+                    /img/default.jpg" class="img-thumbnail img-preview mb-3" style="width: 100px;">
                     </div>
                     <div class="col-sm-8">
                         <div class="custom-file input-group mb-3">
@@ -63,9 +63,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
 
-                    <button type="submit" class="btn btn-primary">Tambah Data</button>
+                <button type="submit" class="btn btn-primary">Tambah Data</button>
             </form>
 
 

@@ -82,19 +82,14 @@ class Movie extends BaseController
 
         ])) {
             //ambil pesan kesalahan
-
-            // $validation = \Config\Services::validation();
-            // return redirect()->to('/movie/create')->withInput()->with('validation', $validation);
             return redirect()->to('/movie/create')->withInput();
         }
-
-
         // ambil gambar poster
         $filePoster = $this->request->getFile('poster');
 
         // cek jika gambar tidak diunggah
         if ($filePoster->getError() == 4) {
-            $namaPoster = 'default.png';
+            $namaPoster = 'default.jpg';
         } else {
             // generate nama poster random
             $namaPoster = $filePoster->getRandomName();
@@ -129,8 +124,8 @@ class Movie extends BaseController
         // cari gambar poster berdasarkan id
         $movie = $this->movieModel->find($id);
 
-        // cek jika file gambarnya default.png
-        if ($movie['poster'] != 'default.png') {
+        // cek jika file gambarnya default.jpg
+        if ($movie['poster'] != 'default.jpg') {
             // hapus gambar
             unlink('img/' . $movie['poster']);
         }
@@ -171,16 +166,43 @@ class Movie extends BaseController
                     'is_unique' => '{field} movie sudah terdaftar!'
                 ]
             ],
-            'poster' => 'required',
+
             'overview' => 'required',
             'kategori' => 'required',
-            'tahun' => 'required|integer|exact_length[4]'
+            'tahun' => 'required|integer|exact_length[4]',
+            'poster' => [
+                'rules' => 'max_size[poster,1024]|is_image[poster]|mime_in[poster,image/jpg,image/png,image/jpeg]',
+                'errors' => [
+                    'is_image' => 'Bukan file tipe gambar.',
+                    'mime_in' => 'Bukan file tipe gambar',
+                    'max_size' => 'Ukuran gambar terlalu besar',
+                ]
+
+            ]
 
         ])) {
             //ambil pesan kesalahan
-            $validation = \Config\Services::validation();
-            return redirect()->to('/movie/edit/' . $this->request->getVar('slug'))->withInput()->with('validation', $validation);
+            // $validation = \Config\Services::validation();
+            // return redirect()->to('/movie/edit/' . $this->request->getVar('slug'))->withInput()->with('validation', $validation);
+            return redirect()->to('/movie/edit/' . $this->request->getVar('slug'))->withInput();
         }
+
+
+        // ambil nama file poster
+        $filePoster = $this->request->getFile('poster');
+
+        // cek gambar apkaah tetap gambar lama
+        if ($filePoster->getError() == 4) {
+            $namaPoster = $this->request->getVar('posterLama');
+        } else {
+            // generate nama file random
+            $namaPoster = $filePoster->getRandomName();
+            // pindahkan gambar 
+            $filePoster->move('img', $namaPoster);
+            // hapus file yang lama
+            unlink('img/' . $this->request->getVar('posterLama'));
+        }
+
 
 
         // dd($this->request->getVar());
@@ -191,10 +213,10 @@ class Movie extends BaseController
             'id' => $id,
             'judul' => $this->request->getVar('judul'),
             'slug' => $slug,
-            'poster' => $this->request->getVar('poster'),
             'overview' => $this->request->getVar('overview'),
             'kategori' => $this->request->getVar('kategori'),
             'tahun' => $this->request->getVar('tahun'),
+            'poster' => $namaPoster,
         ]);
 
 
