@@ -70,7 +70,16 @@ class Movie extends BaseController
             'overview' => 'required',
             'kategori' => 'required',
             'tahun' => 'required|integer|exact_length[4]',
-            'poster' => 'uploaded[poster]'
+            'poster' => [
+                'rules' => 'uploaded[poster]|max_size[poster,1024]|is_image[poster]|mime_in[poster,image/jpg,image/png,image/jpeg]',
+                'errors' => [
+                    'uploaded' => 'Pilih gambar poster terlebih dulu',
+                    'is_image' => 'Bukan file tipe gambar.',
+                    'mime_in' => 'Bukan file tipe gambar',
+                    'max_size' => 'Ukuran gambar terlalu besar',
+                ]
+
+            ]
 
         ])) {
             //ambil pesan kesalahan
@@ -79,7 +88,6 @@ class Movie extends BaseController
             // return redirect()->to('/movie/create')->withInput()->with('validation', $validation);
             return redirect()->to('/movie/create')->withInput();
         }
-
         // dd($this->request->getVar());
 
         $slug = url_title($this->request->getVar('judul'), '-', true);

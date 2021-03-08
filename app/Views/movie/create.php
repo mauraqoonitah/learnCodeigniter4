@@ -55,7 +55,6 @@
                         <div class="input-group mb-3">
 
                             <input type="file" class="form-control  <?= ($validation->hasError('poster')) ? 'is-invalid' : ''; ?>" id="poster" value="<?= old('poster'); ?>" name="poster">
-                            <label class="input-group-text" for="poster">Upload</label>
                             <div class="invalid-feedback mb-3">
                                 <?= $validation->getError('poster'); ?>
                             </div>
