@@ -67,17 +67,17 @@ class Movie extends BaseController
                     'is_unique' => '{field} movie sudah terdaftar!'
                 ]
             ],
-            'poster' => 'required',
             'overview' => 'required',
             'kategori' => 'required',
-            'tahun' => 'required|integer|exact_length[4]'
+            'tahun' => 'required|integer|exact_length[4]',
+            'poster' => 'uploaded[poster]'
 
         ])) {
             //ambil pesan kesalahan
-            $validation = \Config\Services::validation();
-            // dd($validation);
 
-            return redirect()->to('/movie/create')->withInput()->with('validation', $validation);
+            // $validation = \Config\Services::validation();
+            // return redirect()->to('/movie/create')->withInput()->with('validation', $validation);
+            return redirect()->to('/movie/create')->withInput();
         }
 
         // dd($this->request->getVar());

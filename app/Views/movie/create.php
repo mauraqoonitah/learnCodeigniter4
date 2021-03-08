@@ -7,7 +7,8 @@
     <div class="row">
         <div class="col-8">
             <h2 class="my-3">Form Tambah Data Movie</h2>
-            <form action="/movie/save" method="POST">
+
+            <form action="/movie/save" method="POST" enctype="multipart/form-data">
                 <?= csrf_field(); ?>
 
                 <div class="row mb-3">
@@ -19,15 +20,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-3">
-                    <label for="poster" class="col-sm-2 col-form-label">Poster</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control <?= ($validation->hasError('poster')) ? 'is-invalid' : ''; ?>" id="poster" name="poster" value="<?= old('poster'); ?>">
-                        <div class="invalid-feedback">
-                            <?= $validation->getError('poster'); ?>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="row mb-3">
                     <label for="overview" class="col-sm-2 col-form-label">Overview</label>
                     <div class="col-sm-10">
@@ -52,6 +45,21 @@
                         <input type="text" class="form-control <?= ($validation->hasError('tahun')) ? 'is-invalid' : ''; ?>" id="tahun" name="tahun" value="<?= old('tahun'); ?>">
                         <div class="invalid-feedback">
                             <?= $validation->getError('tahun'); ?>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <label for="poster" class="col-sm-2 col-form-label">Poster</label>
+                    <div class="col-sm-10">
+                        <div class="input-group mb-3">
+
+                            <input type="file" class="form-control  <?= ($validation->hasError('poster')) ? 'is-invalid' : ''; ?>" id="poster" value="<?= old('poster'); ?>" name="poster">
+                            <label class="input-group-text" for="poster">Upload</label>
+                            <div class="invalid-feedback mb-3">
+                                <?= $validation->getError('poster'); ?>
+                            </div>
+
                         </div>
                     </div>
                 </div>
