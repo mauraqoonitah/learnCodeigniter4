@@ -71,9 +71,8 @@ class Movie extends BaseController
             'kategori' => 'required',
             'tahun' => 'required|integer|exact_length[4]',
             'poster' => [
-                'rules' => 'uploaded[poster]|max_size[poster,1024]|is_image[poster]|mime_in[poster,image/jpg,image/png,image/jpeg]',
+                'rules' => 'max_size[poster,1024]|is_image[poster]|mime_in[poster,image/jpg,image/png,image/jpeg]',
                 'errors' => [
-                    'uploaded' => 'Pilih gambar poster terlebih dulu',
                     'is_image' => 'Bukan file tipe gambar.',
                     'mime_in' => 'Bukan file tipe gambar',
                     'max_size' => 'Ukuran gambar terlalu besar',
@@ -92,10 +91,16 @@ class Movie extends BaseController
 
         // ambil gambar poster
         $filePoster = $this->request->getFile('poster');
-        // generate nama poster random
-        $namaPoster = $filePoster->getRandomName();
-        // pindahkan file ke folder img
-        $filePoster->move('img',  $namaPoster);
+
+        // cek jika gambar tidak diunggah
+        if ($filePoster->getError() == 4) {
+            $namaPoster = 'default.png';
+        } else {
+            // generate nama poster random
+            $namaPoster = $filePoster->getRandomName();
+            // pindahkan file ke folder img
+            $filePoster->move('img',  $namaPoster);
+        }
         // // ambil nama file poster yg diunggah
         // $namaPoster = $filePoster->getName();
 

@@ -51,13 +51,17 @@
 
                 <div class="row mb-3">
                     <label for="poster" class="col-sm-2 col-form-label">Poster</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-2">
+                        <img src="
+                    /img/default.png" class="img-thumbnail img-preview" style="width: 100px;">
+                    </div>
+                    <div class="col-sm-8">
                         <div class="input-group mb-3">
-
-                            <input type="file" class="form-control  <?= ($validation->hasError('poster')) ? 'is-invalid' : ''; ?>" id="poster" value="<?= old('poster'); ?>" name="poster">
+                            <input type="file" class="custom-file-input form-control  <?= ($validation->hasError('poster')) ? 'is-invalid' : ''; ?>" id="poster" value="<?= old('poster'); ?>" name="poster">
                             <div class="invalid-feedback mb-3">
                                 <?= $validation->getError('poster'); ?>
                             </div>
+
 
                         </div>
                     </div>
