@@ -92,10 +92,12 @@ class Movie extends BaseController
 
         // ambil gambar poster
         $filePoster = $this->request->getFile('poster');
+        // generate nama poster random
+        $namaPoster = $filePoster->getRandomName();
         // pindahkan file ke folder img
-        $filePoster->move('img');
-        // ambil nama file poster yg diunggah
-        $namaPoster = $filePoster->getName();
+        $filePoster->move('img',  $namaPoster);
+        // // ambil nama file poster yg diunggah
+        // $namaPoster = $filePoster->getName();
 
 
 
