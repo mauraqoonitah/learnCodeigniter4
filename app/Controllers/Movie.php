@@ -88,6 +88,17 @@ class Movie extends BaseController
             // return redirect()->to('/movie/create')->withInput()->with('validation', $validation);
             return redirect()->to('/movie/create')->withInput();
         }
+
+
+        // ambil gambar poster
+        $filePoster = $this->request->getFile('poster');
+        // pindahkan file ke folder img
+        $filePoster->move('img');
+        // ambil nama file poster yg diunggah
+        $namaPoster = $filePoster->getName();
+
+
+
         // dd($this->request->getVar());
 
         $slug = url_title($this->request->getVar('judul'), '-', true);
@@ -95,10 +106,10 @@ class Movie extends BaseController
         $this->movieModel->save([
             'judul' => $this->request->getVar('judul'),
             'slug' => $slug,
-            'poster' => $this->request->getVar('poster'),
             'overview' => $this->request->getVar('overview'),
             'kategori' => $this->request->getVar('kategori'),
             'tahun' => $this->request->getVar('tahun'),
+            'poster' => $namaPoster
         ]);
 
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
