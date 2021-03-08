@@ -126,6 +126,14 @@ class Movie extends BaseController
 
     public function delete($id)
     {
+        // cari gambar poster berdasarkan id
+        $movie = $this->movieModel->find($id);
+
+        // cek jika file gambarnya default.png
+        if ($movie['poster'] != 'default.png') {
+            // hapus gambar
+            unlink('img/' . $movie['poster']);
+        }
         $this->movieModel->delete($id);
         session()->setFlashdata('pesan', 'Data berhasil dihapus.');
 
