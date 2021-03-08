@@ -53,22 +53,19 @@
                     <label for="poster" class="col-sm-2 col-form-label">Poster</label>
                     <div class="col-sm-2">
                         <img src="
-                    /img/default.png" class="img-thumbnail img-preview" style="width: 100px;">
+                    /img/default.png" class="img-thumbnail img-preview mb-3" style="width: 100px;">
                     </div>
                     <div class="col-sm-8">
-                        <div class="input-group mb-3">
-                            <input type="file" class="custom-file-input form-control  <?= ($validation->hasError('poster')) ? 'is-invalid' : ''; ?>" id="poster" value="<?= old('poster'); ?>" name="poster">
+                        <div class="custom-file input-group mb-3">
+                            <input type="file" class="custom-file-input form-control  <?= ($validation->hasError('poster')) ? 'is-invalid' : ''; ?>" id="poster" value="<?= old('poster'); ?>" name="poster" onchange="previewImg()">
                             <div class="invalid-feedback mb-3">
                                 <?= $validation->getError('poster'); ?>
                             </div>
-
-
                         </div>
                     </div>
-                </div>
 
 
-                <button type="submit" class="btn btn-primary">Tambah Data</button>
+                    <button type="submit" class="btn btn-primary">Tambah Data</button>
             </form>
 
 

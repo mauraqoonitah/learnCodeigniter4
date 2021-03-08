@@ -33,8 +33,21 @@
     -->
 
     <script>
-        const sampul = document.querySelector('#poster');
-        const sampulLabel = document.querySelector('.custom-file-label');
+        function previewImg() {
+
+            const poster = document.querySelector('#poster');
+            const posterLabel = document.querySelector('.custom-file-input');
+            const imgPreview = document.querySelector('.img-preview');
+
+            posterLabel.textContent = poster.files[0].name;
+
+            const filePoster = new FileReader();
+            filePoster.readAsDataURL(poster.files[0]);
+
+            filePoster.onload = function(e) {
+                imgPreview.src = e.target.result;
+            }
+        }
     </script>
 </body>
 
