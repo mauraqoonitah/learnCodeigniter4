@@ -99,8 +99,6 @@ class Movie extends BaseController
         // // ambil nama file poster yg diunggah
         // $namaPoster = $filePoster->getName();
 
-
-
         // dd($this->request->getVar());
 
         $slug = url_title($this->request->getVar('judul'), '-', true);
@@ -195,15 +193,17 @@ class Movie extends BaseController
         if ($filePoster->getError() == 4) {
             $namaPoster = $this->request->getVar('posterLama');
         } else {
+            $namaPoster = $this->request->getVar('posterLama');
+            // cek jika file gambarnya default.jpg
+            if ($namaPoster != 'default.jpg') {
+                // hapus file yang lama
+                unlink('img/' . $this->request->getVar('posterLama'));
+            }
             // generate nama file random
             $namaPoster = $filePoster->getRandomName();
             // pindahkan gambar 
             $filePoster->move('img', $namaPoster);
-            // hapus file yang lama
-            unlink('img/' . $this->request->getVar('posterLama'));
         }
-
-
 
         // dd($this->request->getVar());
 
