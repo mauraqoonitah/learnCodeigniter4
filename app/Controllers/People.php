@@ -15,7 +15,9 @@ class People extends BaseController
     {
         $data = [
             'title' => 'Daftar people',
-            'people' => $this->peopleModel->findAll()
+            // 'people' => $this->peopleModel->findAll()
+            'people' => $this->peopleModel->paginate(6, 'people'),
+            'pager' => $this->peopleModel->pager
         ];
 
 

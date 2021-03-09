@@ -33,6 +33,8 @@
 
                 </tbody>
             </table>
+
+            <?= $pager->links('people', 'people_pagination'); ?>
         </div>
     </div>
 </div>
