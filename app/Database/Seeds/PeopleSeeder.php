@@ -3,6 +3,7 @@
 namespace App\Database\Seeds;
 
 use CodeIgniter\Database\Seeder;
+use CodeIgniter\I18n\Time;
 
 class PeopleSeeder extends Seeder
 {
@@ -11,13 +12,16 @@ class PeopleSeeder extends Seeder
     {
         $data = [
             'nama' => 'Maura Qoonitah Putri',
-            'alamat'    => 'Bintara 6'
+            'alamat'    => 'Bintara 6',
+            'created_at' => Time::now(),
+            'updated_at' => Time::now(),
         ];
 
-        // Simple Queries
-        $this->db->query("INSERT INTO people (nama, alamat) VALUES(:nama:, :alamat:)", $data);
+        // Using Query Builder
+        $this->db->table('people')->insert($data);
 
-        // // Using Query Builder
-        // $this->db->table('users')->insert($data);
+        // Simple Queries
+        // $this->db->query("INSERT INTO people (nama, alamat) VALUES(:nama:, :alamat:)", $data);
+
     }
 }
