@@ -3,3 +3,6 @@ php spark migrate:create NamaFile
 php spark migrate
 
 php spark db:seed PeopleSeeder
+
+faker library: https://github.com/fzaninotto/Faker
+$ composer require fzaninotto/faker
