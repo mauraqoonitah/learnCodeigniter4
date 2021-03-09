@@ -19,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $i = 1; ?>
+                    <?php $i = 1 + (6 * ($currentPage - 1)); ?>
                     <?php foreach ($people as $p) : ?>
                         <tr>
                             <th scope="row"><?= $i++; ?></th>

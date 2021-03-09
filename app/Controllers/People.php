@@ -13,11 +13,15 @@ class People extends BaseController
     }
     public function index()
     {
+
+        $currentPage = $this->request->getVar('page_people') ? $this->request->getVar('page_people') : 1;
+
         $data = [
             'title' => 'Daftar people',
             // 'people' => $this->peopleModel->findAll()
             'people' => $this->peopleModel->paginate(6, 'people'),
-            'pager' => $this->peopleModel->pager
+            'pager' => $this->peopleModel->pager,
+            'currentPage' => $currentPage
         ];
 
 
