@@ -37,13 +37,15 @@ class PeopleSeeder extends Seeder
         $faker = \Faker\Factory::create('id_ID');
         // dd($faker->name);
 
-        $data = [
-            'nama' => $faker->name,
-            'alamat' => $faker->address,
-            'created_at' => Time::createFromTimestamp($faker->unixTime()),
-            'updated_at' => Time::now(),
-        ];
+        for ($i = 0; $i < 100; $i++) {
+            $data = [
+                'nama' => $faker->name,
+                'alamat' => $faker->address,
+                'created_at' => Time::createFromTimestamp($faker->unixTime()),
+                'updated_at' => Time::now(),
+            ];
 
-        $this->db->table('people')->insert($data);
+            $this->db->table('people')->insert($data);
+        }
     }
 }
