@@ -40,7 +40,7 @@ class PeopleSeeder extends Seeder
         $data = [
             'nama' => $faker->name,
             'alamat' => $faker->address,
-            'created_at' => Time::now(),
+            'created_at' => Time::createFromTimestamp($faker->unixTime()),
             'updated_at' => Time::now(),
         ];
 
