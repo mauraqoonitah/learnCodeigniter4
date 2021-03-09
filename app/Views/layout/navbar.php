@@ -18,6 +18,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/movie">Movie</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/people">People</a>
+                </li>
 
             </ul>
         </div>
