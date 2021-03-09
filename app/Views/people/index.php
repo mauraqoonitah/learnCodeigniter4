@@ -4,10 +4,19 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-6">
+        </div>
+        <h1 class="mt-2">Daftar people</h1>
+        <form action="" method="post">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Masukkan keyword pencarian.." name="keyword">
+                <button class="btn btn-outline-secondary" type="submit" name="submit">Go</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="row">
         <div class="col">
-
-            <h1 class="mt-2">Daftar people</h1>
-
             <table class="table">
                 <thead>
                     <tr>

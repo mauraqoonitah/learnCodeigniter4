@@ -16,10 +16,17 @@ class People extends BaseController
 
         $currentPage = $this->request->getVar('page_people') ? $this->request->getVar('page_people') : 1;
 
+        $keyword = $this->request->getVar('keyword');
+        if ($keyword) {
+            $people = $this->peopleModel->search($keyword);
+        } else {
+            $people = $this->peopleModel;
+        }
+
         $data = [
             'title' => 'Daftar people',
             // 'people' => $this->peopleModel->findAll()
-            'people' => $this->peopleModel->paginate(6, 'people'),
+            'people' => $people->paginate(6, 'people'),
             'pager' => $this->peopleModel->pager,
             'currentPage' => $currentPage
         ];
