@@ -1,0 +1,3 @@
+php spark migrate:create NamaFile
+
+php spark migrate
