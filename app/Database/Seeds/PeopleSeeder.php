@@ -34,7 +34,7 @@ class PeopleSeeder extends Seeder
 
 
 
-        $faker = \Faker\Factory::create();
+        $faker = \Faker\Factory::create('id_ID');
         // dd($faker->name);
 
         $data = [
